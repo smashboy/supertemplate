@@ -1,6 +1,5 @@
 import { createServer as createViteServer } from "vite";
 import fastify from "fastify";
-import fs from "node:fs/promises";
 import { initFastifyPlugins } from "./initPlugins";
 
 export async function createServer() {
@@ -30,15 +29,9 @@ export async function createServer() {
 
   server.get("*", async (req, res) => {
     try {
-      const url = req.originalUrl;
-
-      let htmlTemplate = await fs.readFile("./index.html", "utf-8");
-      htmlTemplate = await vite.transformIndexHtml(url, htmlTemplate);
-
       const entry = await vite.ssrLoadModule("./src/app/entry.server.ts");
-
-      console.info("Rendering: ", url);
       await entry.render(req, res, vite);
+      console.info("Rendering: ", req.originalUrl);
     } catch (error) {
       // @ts-expect-error
       vite.ssrFixStacktrace(error);
