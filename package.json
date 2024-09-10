@@ -1,0 +1,30 @@
+{
+  "name": "supertemplate",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx main.ts",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vite-plugin-restart": "^0.4.1"
+  },
+  "dependencies": {
+    "@fastify/middie": "^8.3.1",
+    "@fastify/one-line-logger": "^2.0.0",
+    "@tanstack/react-router": "^1.57.8",
+    "@tanstack/start": "^1.57.8",
+    "@trpc/server": "^11.0.0-rc.502",
+    "fastify": "^4.28.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
