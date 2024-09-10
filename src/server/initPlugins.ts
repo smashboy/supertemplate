@@ -11,9 +11,6 @@ export async function initFastifyPlugins(
   server: FastifyInstance,
   vite: ViteDevServer
 ) {
-  await server.register(middie);
-  server.use(vite.middlewares);
-
   const trpcConfig: FastifyTRPCPluginOptions<AppRouter> = {
     prefix: "/api/trpc",
     trpcOptions: {
@@ -26,5 +23,10 @@ export async function initFastifyPlugins(
     },
   };
 
-  await server.register(fastifyTRPCPlugin, trpcConfig);
+  await Promise.all([
+    server.register(middie),
+    server.register(fastifyTRPCPlugin, trpcConfig),
+  ]);
+
+  server.use(vite.middlewares);
 }
