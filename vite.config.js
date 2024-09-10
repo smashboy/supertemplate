@@ -1,14 +1,12 @@
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-
-const path = fileURLToPath(import.meta.url);
-const root = resolve(dirname(path), "src", "app");
-
-const plugins = [viteReact({ jsxRuntime: "automatic" })];
+import ReactPlugin from "@vitejs/plugin-react";
+import ViteRestart from "vite-plugin-restart";
 
 export default defineConfig({
-  root,
-  plugins,
+  plugins: [
+    ReactPlugin({ jsxRuntime: "automatic" }),
+    ViteRestart({
+      restart: ["./src/server/*"],
+    }),
+  ],
 });
